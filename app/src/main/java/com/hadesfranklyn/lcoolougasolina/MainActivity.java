@@ -2,6 +2,7 @@ package com.hadesfranklyn.lcoolougasolina;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -74,4 +75,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void toastPersonalizado(){
+        ImageView imagem = new ImageView(getApplicationContext());
+        imagem.setImageResource(android.R.drawable.stat_notify_error);
+
+        TextView textView = new TextView(getApplicationContext());
+        textView.setBackgroundResource(R.color.colorAccent);
+        textView.setText("Preencha os preços primeiro!");
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(imagem);
+//        toast.setView(textView);
+        toast.show();
+    }
 }
