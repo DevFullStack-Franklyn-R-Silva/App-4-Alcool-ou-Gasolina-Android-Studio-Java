@@ -3,6 +3,7 @@ package com.hadesfranklyn.lcoolougasolina;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (camposValidados) {
             calcular(precoAlcool, precoGasolina);
+
         } else {
+            Toast.makeText(getApplicationContext(),"Preencha os preços primeiro!",Toast.LENGTH_SHORT).show();
             textoResultado.setText("Preencha os preços primeiro!");
         }
     }
@@ -64,8 +67,10 @@ public class MainActivity extends AppCompatActivity {
         Double resultado = valorAlcool / valorGasolina;
         if (resultado >= 0.7) {
             textoResultado.setText("Melhor utilizar Gasolina");
+            Toast.makeText(getApplicationContext(),"Melhor utilizar Gasolina",Toast.LENGTH_SHORT).show();
         } else {
              textoResultado.setText("Melhor utilizar Álcool");
+            Toast.makeText(getApplicationContext(),"Melhor utilizar Álcool",Toast.LENGTH_SHORT).show();
         }
     }
 
