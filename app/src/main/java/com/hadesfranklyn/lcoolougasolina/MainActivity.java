@@ -1,11 +1,13 @@
 package com.hadesfranklyn.lcoolougasolina;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -38,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
             calcular(precoAlcool, precoGasolina);
 
         } else {
-            Toast.makeText(getApplicationContext(),"Preencha os preços primeiro!",Toast.LENGTH_SHORT).show();
+            alertDialog();
+            Toast.makeText(getApplicationContext(), "Preencha os preços primeiro!", Toast.LENGTH_SHORT).show();
             textoResultado.setText("Preencha os preços primeiro!");
         }
     }
@@ -68,14 +71,14 @@ public class MainActivity extends AppCompatActivity {
         Double resultado = valorAlcool / valorGasolina;
         if (resultado >= 0.7) {
             textoResultado.setText("Melhor utilizar Gasolina");
-            Toast.makeText(getApplicationContext(),"Melhor utilizar Gasolina",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Melhor utilizar Gasolina", Toast.LENGTH_SHORT).show();
         } else {
-             textoResultado.setText("Melhor utilizar Álcool");
-            Toast.makeText(getApplicationContext(),"Melhor utilizar Álcool",Toast.LENGTH_SHORT).show();
+            textoResultado.setText("Melhor utilizar Álcool");
+            Toast.makeText(getApplicationContext(), "Melhor utilizar Álcool", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void toastPersonalizado(){
+    public void toastPersonalizado() {
         ImageView imagem = new ImageView(getApplicationContext());
         imagem.setImageResource(android.R.drawable.stat_notify_error);
 
@@ -88,5 +91,39 @@ public class MainActivity extends AppCompatActivity {
         toast.setView(imagem);
 //        toast.setView(textView);
         toast.show();
+    }
+
+    public void alertDialog() {
+
+        //Instancia AlertDialog
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+
+        //Configurar titulo e mensagem
+        dialog.setTitle("Título da dialog");
+        dialog.setMessage("Mensagem da dialog");
+
+        //Configurar cancelamento
+        dialog.setCancelable(false);
+
+        //Configurar icone
+        dialog.setIcon(android.R.drawable.ic_btn_speak_now);
+
+        //Configura acoes para sim e nao
+        dialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(getApplicationContext(), "Executar ação ao clicar no botão Sim", Toast.LENGTH_LONG).show();
+            }
+        });
+        dialog.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(getApplicationContext(), "Executar ação ao clicar no botão Não", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        //Cria e exibir AlertDialog
+        dialog.create();
+        dialog.show();
     }
 }
